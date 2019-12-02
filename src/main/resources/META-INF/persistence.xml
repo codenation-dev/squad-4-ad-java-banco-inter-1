@@ -17,7 +17,7 @@
             <property name="javax.persistence.jdbc.driver"
                       value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:postgresql://localhost:5432/central-de-erro" ></property>
+                      value="jdbc:postgresql://localhost:5432/central-de-erro"></property>
             <property name="javax.persistence.jdbc.user"
                       value="postgres" />
             <property name="javax.persistence.jdbc.password"
@@ -28,7 +28,6 @@
             <property name="hibernate.hbm2ddl.auto" value="create" /> <!-- create / create-drop / update -->
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
-
 
         </properties>
     </persistence-unit>
