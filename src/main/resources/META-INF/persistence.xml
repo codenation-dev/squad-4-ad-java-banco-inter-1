@@ -10,7 +10,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- entidade mapeada -->
-        <class>br.com.centraldeerros.centraldeerro.entidades</class>
+        <class>br.com.centraldeerros.centraldeerro.entities</class>
 
         <properties>
             <!-- dados da conexao -->

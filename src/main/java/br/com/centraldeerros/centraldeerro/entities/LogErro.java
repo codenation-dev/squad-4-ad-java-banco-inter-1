@@ -1,4 +1,4 @@
-package br.com.centraldeerros.centraldeerro.entidades;
+package br.com.centraldeerros.centraldeerro.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
