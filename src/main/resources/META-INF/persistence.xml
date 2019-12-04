@@ -21,7 +21,7 @@
             <property name="javax.persistence.jdbc.user"
                       value="postgres" />
             <property name="javax.persistence.jdbc.password"
-                      value="mpee123cao456" />
+                      value="post123" />
 
             <!--  propriedades do hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect "/> <!-- DB Dialect -->

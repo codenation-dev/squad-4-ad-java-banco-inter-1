@@ -32,8 +32,8 @@ public class ErroServiceImpl implements ErroService {
     }
 
     @Override
-    public List<Erro> findByDescricao(String descricao){
-        return erroRepository.findByDescricao(descricao);
+    public List<Erro> findByDetalhes(String detalhes){
+        return erroRepository.findByDetalhes(detalhes);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ErroServiceImpl implements ErroService {
     }
 
     @Override
-    public Optional<Erro> save(Erro erro){
+    public Erro save(Erro erro){
         return erroRepository.save(erro);
     }
 

@@ -15,11 +15,11 @@ public interface ErroService {
 
     Long getQuantidadeEvento();
 
-    List<Erro> findByDescricao(String descricao);
+    List<Erro> findByDetalhes(String detalhes);
 
     List<Erro> findByOrigem(String origem);
 
-    Optional<Erro> save(Erro erro);
+    Erro save(Erro erro);
 
     void update(Long id, Erro erro);
 

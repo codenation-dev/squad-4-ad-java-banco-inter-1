@@ -2,6 +2,7 @@ package br.com.centraldeerros.centraldeerro.repositories;
 
 import br.com.centraldeerros.centraldeerro.entities.Erro;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,15 +16,15 @@ public interface ErroRepository extends JpaRepository<Erro, Long> {
     // # implementar pageable
     List<Erro> findByLevel(String level);
 
+    @Query("SELECT count(e.quantidadeDeEventos) FROM Erro e")
     Long getQuantidadeEvento();
 
     // # implementar pageable
-    List<Erro> findByDescricao(String descricao);
+    @Query("SELECT e FROM Erro e WHERE e.logErro.detalhes = :detalhes")
+    List<Erro> findByDetalhes(String detalhes);
 
     // # implementar pageable
+    @Query("SELECT e FROM Erro e WHERE e.logErro.origem = :origem")
     List<Erro> findByOrigem(String origem);
-
-    @Override
-    Optional<Erro> save(Erro erro);
 
 }
