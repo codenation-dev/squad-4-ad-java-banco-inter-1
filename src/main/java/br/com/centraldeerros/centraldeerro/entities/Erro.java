@@ -31,5 +31,10 @@ public class Erro {
     @OneToOne
     private LogErro logErro;
 
+    public void update(Erro erro){
+        this.level = erro.getLevel();
+        this.quantidadeDeEventos = erro.getQuantidadeDeEventos();
+        this.logErro = erro.getLogErro();
+    }
 
 }

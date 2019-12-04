@@ -23,4 +23,7 @@ public interface ErroRepository extends JpaRepository<Erro, Long> {
     // # implementar pageable
     List<Erro> findByOrigem(String origem);
 
+    @Override
+    Optional<Erro> save(Erro erro);
+
 }

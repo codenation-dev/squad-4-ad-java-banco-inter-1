@@ -21,7 +21,7 @@ public interface ErroService {
 
     Optional<Erro> save(Erro erro);
 
-    void update(Erro erro);
+    void update(Long id, Erro erro);
 
     void delete(Long id);
 }
