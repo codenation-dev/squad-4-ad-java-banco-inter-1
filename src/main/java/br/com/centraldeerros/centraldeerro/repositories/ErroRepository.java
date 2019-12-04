@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ErroRepository extends JpaRepository<Erro, Long> {
 
-    Optional findById(Long id);
+    Optional<Erro> findById(Long id);
 
     // # implementar pageable
     List<Erro> findByLevel(String level);

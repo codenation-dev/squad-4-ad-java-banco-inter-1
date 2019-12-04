@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ErroService {
 
-    Optional findById(Long id);
+    Optional<Erro> findById(Long id);
 
     // # implementar pageable
     List<Erro> findByLevel(String leve);
@@ -19,7 +19,7 @@ public interface ErroService {
 
     List<Erro> findByOrigem(String origem);
 
-    Erro save(Erro erro);
+    Optional<Erro> save(Erro erro);
 
     void update(Erro erro);
 
