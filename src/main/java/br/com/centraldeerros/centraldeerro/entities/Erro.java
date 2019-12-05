@@ -9,15 +9,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
+@Getter
+@Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 public class Erro {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column
@@ -28,13 +29,41 @@ public class Erro {
     @Column
     private Long quantidadeDeEventos;
 
-    @OneToOne
-    private LogErro logErro;
+
+    @Column
+    @NotNull
+    @NotBlank
+    private String titulo;
+
+    @Column
+    private String detalhes;
+
+    @Column
+    @NotNull
+    @NotBlank
+    private String origem;
+
+    @Column
+    @NotNull
+    @NotBlank
+    private String dataOcorrencia;
+
+    @Column
+    private String dataEnvioOcorrencia;
+
+    // revisar esse atributo
+    @Column
+    private String token;
+
+    @Column
+    private String plataforma;
+
+    @Column
+    private String versaoPlataforma;
 
     public void update(Erro erro){
         this.level = erro.getLevel();
         this.quantidadeDeEventos = erro.getQuantidadeDeEventos();
-        this.logErro = erro.getLogErro();
     }
 
 }
