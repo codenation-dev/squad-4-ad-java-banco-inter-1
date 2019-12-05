@@ -7,6 +7,7 @@ import br.com.centraldeerros.centraldeerro.services.ErroServiceDev;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@Service
 public abstract class ErroServiceDevImpl extends ErroBaseServiceImpl<ErroDesenvolvimento> implements ErroServiceDev {
 
     public ErroServiceDevImpl(ErroRepositoryDev erroRepository) {
