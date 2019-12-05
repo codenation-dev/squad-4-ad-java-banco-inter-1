@@ -1,36 +1,32 @@
 package br.com.centraldeerros.centraldeerro.controllers;
 
-import br.com.centraldeerros.centraldeerro.entities.Erro;
 import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
+import br.com.centraldeerros.centraldeerro.entities.ErroHomologacao;
 import br.com.centraldeerros.centraldeerro.services.ErroBaseService;
-import br.com.centraldeerros.centraldeerro.services.ErroServiceDev;
-import lombok.AllArgsConstructor;
+import br.com.centraldeerros.centraldeerro.services.ErroServiceHml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.net.URI;
 
-
 @RestController
-@RequestMapping("/erros/dev")
-@Component
-public class ErroControllerDev {
+@RequestMapping("/erros/hml")
+public class ErroControllerHml {
 
-    private ErroBaseService<ErroDesenvolvimento> erroServiceDev;
+    private ErroBaseService<ErroHomologacao> erroBaseServiceHml;
 
     @Autowired
-    public ErroControllerDev(ErroBaseService<ErroDesenvolvimento> erroServiceDev){
-        this.erroServiceDev = erroServiceDev;
+    public ErroControllerHml(ErroBaseService<ErroHomologacao> erroBaseServiceHml){
+        this.erroBaseServiceHml = erroBaseServiceHml;
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ErroDesenvolvimento> save(@RequestBody ErroDesenvolvimento erro){
-        ErroDesenvolvimento erroSalvo = erroServiceDev.save(erro);
+    public ResponseEntity<ErroHomologacao> save(@RequestBody ErroHomologacao erro){
+        ErroHomologacao erroSalvo = erroBaseServiceHml.save(erro);
 
         URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
@@ -43,7 +39,7 @@ public class ErroControllerDev {
 
     @GetMapping("/{id}")
     @Transactional
-    public ResponseEntity<ErroDesenvolvimento> findById(@PathVariable Long id){
-        return ResponseEntity.ok(erroServiceDev.findById(id).get());
+    public ResponseEntity<ErroHomologacao> findById(@PathVariable Long id){
+        return ResponseEntity.ok(erroBaseServiceHml.findById(id).get());
     }
 }

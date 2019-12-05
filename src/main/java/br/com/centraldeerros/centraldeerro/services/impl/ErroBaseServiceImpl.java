@@ -1,9 +1,8 @@
 package br.com.centraldeerros.centraldeerro.services.impl;
 
 import br.com.centraldeerros.centraldeerro.entities.Erro;
-import br.com.centraldeerros.centraldeerro.repositories.ErroRepository;
-import br.com.centraldeerros.centraldeerro.services.ErroService;
-import lombok.AllArgsConstructor;
+import br.com.centraldeerros.centraldeerro.repositories.ErroBaseRepository;
+import br.com.centraldeerros.centraldeerro.services.ErroBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +11,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ErroServiceImpl implements ErroService {
+public class ErroBaseServiceImpl<T extends Erro> implements ErroBaseService<T> {
 
-    private ErroRepository erroRepository;
+    private ErroBaseRepository<T> erroRepository;
+    private T tipo;
 
     @Autowired
-    public ErroServiceImpl(ErroRepository erroRepository){
+    public ErroBaseServiceImpl(ErroBaseRepository<T> erroRepository){
         this.erroRepository = erroRepository;
     }
 
     @Override
     @Transactional
-    public Optional<Erro> findById(Long id){
+    public Optional<T> findById(Long id){
         return erroRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public List<Erro> findByLevel(String level){
+    public List<T> findByLevel(String level){
+        //String ambiente = tipo.getClass().getName();
+
         return erroRepository.findByLevel(level);
     }
 
@@ -42,26 +44,28 @@ public class ErroServiceImpl implements ErroService {
 
     @Override
     @Transactional
-    public List<Erro> findByDetalhes(String detalhes){
+    public List<T> findByDetalhes(String detalhes){
+        //String ambiente = tipo.getClass().getName();
         return erroRepository.findByDetalhes(detalhes);
     }
 
     @Override
     @Transactional
-    public List<Erro> findByOrigem(String origem){
+    public List<T> findByOrigem(String origem){
+        //String ambiente = tipo.getClass().getName();
         return erroRepository.findByOrigem(origem);
     }
 
     @Override
     @Transactional
-    public Erro save(Erro erro){
+    public T save(T erro){
         return erroRepository.save(erro);
     }
 
     @Override
     @Transactional
-    public void update(Long id, Erro erro){
-        Erro erroUpdate = findById(id).get();
+    public void update(Long id, T erro){
+        T erroUpdate = findById(id).get();
 
         erroUpdate.update(erro);
 
@@ -73,5 +77,4 @@ public class ErroServiceImpl implements ErroService {
     public void delete(Long id){
         erroRepository.deleteById(id);
     }
-
 }

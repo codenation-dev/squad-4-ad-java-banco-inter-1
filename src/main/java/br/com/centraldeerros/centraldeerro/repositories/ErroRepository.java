@@ -20,11 +20,11 @@ public interface ErroRepository extends JpaRepository<Erro, Long> {
     Long getQuantidadeEvento();
 
     // # implementar pageable
-    @Query("SELECT e FROM Erro e WHERE e.logErro.detalhes = :detalhes")
+    @Query("SELECT e FROM Erro e WHERE e.detalhes = :detalhes")
     List<Erro> findByDetalhes(String detalhes);
 
     // # implementar pageable
-    @Query("SELECT e FROM Erro e WHERE e.logErro.origem = :origem")
+    @Query("SELECT e FROM Erro e WHERE e.origem = :origem")
     List<Erro> findByOrigem(String origem);
 
 }
