@@ -1,8 +1,6 @@
 package br.com.centraldeerros.centraldeerro.controllers;
 
-import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.entities.ErroHomologacao;
-import br.com.centraldeerros.centraldeerro.services.ErroBaseService;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceHml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

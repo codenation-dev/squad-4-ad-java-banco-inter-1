@@ -1,7 +1,6 @@
 package br.com.centraldeerros.centraldeerro.services;
 
 import br.com.centraldeerros.centraldeerro.entities.Erro;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
