@@ -4,6 +4,7 @@ import br.com.centraldeerros.centraldeerro.entities.Erro;
 import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.services.ErroBaseService;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceDev;
+import br.com.centraldeerros.centraldeerro.services.impl.ErroServiceDevImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,10 @@ import java.net.URI;
 @Component
 public class ErroControllerDev {
 
-    private ErroBaseService<ErroDesenvolvimento> erroServiceDev;
+    private ErroServiceDev erroServiceDev;
 
     @Autowired
-    public ErroControllerDev(ErroBaseService<ErroDesenvolvimento> erroServiceDev){
+    public ErroControllerDev(ErroServiceDev erroServiceDev){
         this.erroServiceDev = erroServiceDev;
     }
 

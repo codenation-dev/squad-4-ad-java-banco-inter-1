@@ -16,10 +16,10 @@ import java.net.URI;
 @RequestMapping("/erros/hml")
 public class ErroControllerHml {
 
-    private ErroBaseService<ErroHomologacao> erroBaseServiceHml;
+    private ErroServiceHml erroBaseServiceHml;
 
     @Autowired
-    public ErroControllerHml(ErroBaseService<ErroHomologacao> erroBaseServiceHml){
+    public ErroControllerHml(ErroServiceHml erroBaseServiceHml){
         this.erroBaseServiceHml = erroBaseServiceHml;
     }
 

@@ -15,10 +15,10 @@ import java.net.URI;
 @RestController
 @RequestMapping("/erros/prod")
 public class ErroControllerProd {
-    private ErroBaseService<ErroProducao> erroServiceProd;
+    private ErroServiceProd erroServiceProd;
 
     @Autowired
-    public ErroControllerProd(ErroBaseService<ErroProducao> erroServiceProd){
+    public ErroControllerProd(ErroServiceProd erroServiceProd){
         this.erroServiceProd = erroServiceProd;
     }
 
