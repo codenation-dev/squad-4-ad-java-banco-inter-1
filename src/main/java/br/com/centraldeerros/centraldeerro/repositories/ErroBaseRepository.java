@@ -16,18 +16,17 @@ public interface ErroBaseRepository<T extends Erro> extends JpaRepository<T,Long
     Optional<T> findById(Long id);
 
     // # implementar pageable
-    @Query(value = "SELECT e FROM T e WHERE e.level = :level", nativeQuery = true)
+    @Query(value = "SELECT e FROM #{#entityName} e WHERE e.level = :level")
     List<T> findByLevel(@Param("level") String level);
 
-    @Query(value = "SELECT count(e.quantidadeDeEventos) FROM T e", nativeQuery = true)
+    @Query(value = "SELECT count(e.quantidadeDeEventos) FROM #{#entityName} e", nativeQuery = true)
     Long getQuantidadeEvento();
 
     // # implementar pageable
-    @Query(value = "SELECT e FROM T e WHERE e.detalhes = :detalhes", nativeQuery = true)
+    @Query(value = "SELECT e FROM #{#entityName} e WHERE e.detalhes = :detalhes", nativeQuery = true)
     List<T> findByDetalhes(@Param("detalhes") String detalhes);
 
     // # implementar pageable
-    //@Query("SELECT e FROM :ambiente e WHERE e.origem = :origem")
-    @Query(value = "SELECT e FROM T e WHERE e.origem = :origem", nativeQuery = true)
+    @Query(value = "SELECT e FROM Erro e WHERE e.origem = :origem", nativeQuery = true)
     List<T> findByOrigem(@Param("origem") String origem);
 }

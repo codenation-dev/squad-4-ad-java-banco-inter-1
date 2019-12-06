@@ -1,5 +1,6 @@
 package br.com.centraldeerros.centraldeerro.controllers;
 
+import br.com.centraldeerros.centraldeerro.entities.Erro;
 import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceDev;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -42,5 +44,11 @@ public class ErroControllerDev {
     @Transactional
     public ResponseEntity<ErroDesenvolvimento> findById(@PathVariable Long id){
         return ResponseEntity.ok(erroServiceDev.findById(id).get());
+    }
+
+    @GetMapping
+    @Transactional
+    public List<ErroDesenvolvimento> findByLevel(@RequestBody String level){
+        return erroServiceDev.findByLevel(level);
     }
 }

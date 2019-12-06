@@ -1,5 +1,6 @@
 package br.com.centraldeerros.centraldeerro.controllers;
 
+import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.entities.ErroHomologacao;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceHml;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/erros/hml")
@@ -39,5 +41,11 @@ public class ErroControllerHml {
     @Transactional
     public ResponseEntity<ErroHomologacao> findById(@PathVariable Long id){
         return ResponseEntity.ok(erroBaseServiceHml.findById(id).get());
+    }
+
+    @GetMapping
+    @Transactional
+    public List<ErroHomologacao> findByLevel(@RequestBody String level){
+        return erroBaseServiceHml.findByLevel(level);
     }
 }
