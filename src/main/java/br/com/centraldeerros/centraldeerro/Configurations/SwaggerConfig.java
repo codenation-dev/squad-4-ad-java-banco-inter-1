@@ -25,6 +25,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("br.com.centraldeerros.centraldeerro.controllers"))
+                    .apis(RequestHandlerSelectors.any())
                     .paths(PathSelectors.ant("/**"))
                     .build()
                 .apiInfo(metaData())
@@ -48,5 +49,6 @@ public class SwaggerConfig {
                 .licenseUrl("https://www.apache.org/license/LICENSE-2.0")
                 .build();
     }
+
 
 }
