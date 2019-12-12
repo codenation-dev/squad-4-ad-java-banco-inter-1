@@ -11,7 +11,7 @@ public interface ErroBaseService<T extends Erro> {
     Optional<T> findById(Long id);
 
     // # implementar pageable
-    List<T> findByLevel(String leve);
+    List<T> findByLevel(String level);
 
     Long getQuantidadeEvento();
 

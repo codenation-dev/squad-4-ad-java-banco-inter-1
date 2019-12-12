@@ -16,17 +16,17 @@ import java.util.List;
 @RequestMapping("/erros/hml")
 public class ErroControllerHml {
 
-    private ErroServiceHml erroBaseServiceHml;
+    private ErroServiceHml erroServiceHml;
 
     @Autowired
     public ErroControllerHml(ErroServiceHml erroBaseServiceHml){
-        this.erroBaseServiceHml = erroBaseServiceHml;
+        this.erroServiceHml = erroBaseServiceHml;
     }
 
     @PostMapping
     @Transactional
     public ResponseEntity<ErroHomologacao> save(@RequestBody ErroHomologacao erro){
-        ErroHomologacao erroSalvo = erroBaseServiceHml.save(erro);
+        ErroHomologacao erroSalvo = erroServiceHml.save(erro);
 
         URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
@@ -37,15 +37,42 @@ public class ErroControllerHml {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ErroHomologacao erro){
+        erroServiceHml.update(id, erro);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        erroServiceHml.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}")
     @Transactional
     public ResponseEntity<ErroHomologacao> findById(@PathVariable Long id){
-        return ResponseEntity.ok(erroBaseServiceHml.findById(id).get());
+        return ResponseEntity.ok(erroServiceHml.findById(id).get());
     }
 
-    @GetMapping
+    @GetMapping("/level")
     @Transactional
-    public List<ErroHomologacao> findByLevel(@RequestBody String level){
-        return erroBaseServiceHml.findByLevel(level);
+    public ResponseEntity<List<ErroHomologacao>> findByLevel(@RequestBody String level){
+        return ResponseEntity.ok(erroServiceHml.findByLevel(level));
     }
+
+    @GetMapping("/detalhes")
+    @Transactional
+    public ResponseEntity<List<ErroHomologacao>> findByDetalhes(@RequestBody String detalhes){
+        return ResponseEntity.ok(erroServiceHml.findByDetalhes(detalhes));
+    }
+
+    @GetMapping("/origem")
+    @Transactional
+    public ResponseEntity<List<ErroHomologacao>> findByOrigem(@RequestBody String findByOrigem){
+        return ResponseEntity.ok(erroServiceHml.findByOrigem(findByOrigem));
+    }
+    
 }

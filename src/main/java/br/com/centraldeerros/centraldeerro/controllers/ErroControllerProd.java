@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/erros/prod")
@@ -35,9 +36,41 @@ public class ErroControllerProd {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ErroProducao erro){
+        erroServiceProd.update(id, erro);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        erroServiceProd.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}")
     @Transactional
     public ResponseEntity<ErroProducao> findById(@PathVariable Long id){
         return ResponseEntity.ok(erroServiceProd.findById(id).get());
+    }
+
+    @GetMapping("/level")
+    @Transactional
+    public ResponseEntity<List<ErroProducao>> findByLevel(@RequestBody String level){
+        return ResponseEntity.ok(erroServiceProd.findByLevel(level));
+    }
+
+    @GetMapping("/detalhes")
+    @Transactional
+    public ResponseEntity<List<ErroProducao>> findByDetalhes(@RequestBody String detalhes){
+        return ResponseEntity.ok(erroServiceProd.findByDetalhes(detalhes));
+    }
+
+    @GetMapping("/origem")
+    @Transactional
+    public ResponseEntity<List<ErroProducao>> findByOrigem(@RequestBody String findByOrigem){
+        return ResponseEntity.ok(erroServiceProd.findByOrigem(findByOrigem));
     }
 }

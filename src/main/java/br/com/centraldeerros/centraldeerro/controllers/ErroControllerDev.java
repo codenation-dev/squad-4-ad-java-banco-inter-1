@@ -40,15 +40,43 @@ public class ErroControllerDev {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ErroDesenvolvimento erro){
+        erroServiceDev.update(id, erro);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        erroServiceDev.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}")
     @Transactional
     public ResponseEntity<ErroDesenvolvimento> findById(@PathVariable Long id){
         return ResponseEntity.ok(erroServiceDev.findById(id).get());
     }
 
-    @GetMapping
+    @GetMapping("/level")
     @Transactional
-    public List<ErroDesenvolvimento> findByLevel(@RequestBody String level){
-        return erroServiceDev.findByLevel(level);
+    public ResponseEntity<List<ErroDesenvolvimento>> findByLevel(@RequestBody String level){
+        return ResponseEntity.ok(this.erroServiceDev.findByLevel(level));
     }
+
+    @GetMapping("/detalhes")
+    @Transactional
+    public ResponseEntity<List<ErroDesenvolvimento>> findByDetalhes(@RequestBody String detalhes){
+        return ResponseEntity.ok(erroServiceDev.findByDetalhes(detalhes));
+    }
+
+    @GetMapping("/origem")
+    @Transactional
+    public ResponseEntity<List<ErroDesenvolvimento>> findByOrigem(@RequestBody String findByOrigem){
+        return ResponseEntity.ok(erroServiceDev.findByOrigem(findByOrigem));
+    }
+
+
 }
