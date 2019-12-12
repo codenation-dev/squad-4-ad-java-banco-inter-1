@@ -3,6 +3,7 @@ package br.com.centraldeerros.centraldeerro.controllers;
 import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.entities.ErroHomologacao;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceHml;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,8 @@ public class ErroControllerHml {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ErroHomologacao> save(@Valid @RequestBody ErroHomologacao erro){
+    public ResponseEntity<ErroHomologacao> save(@Valid @RequestBody ErroHomologacao erro, @RequestHeader(name = "Authorization") String token){
+        erro.setToken(token);
         ErroHomologacao erroSalvo = erroServiceHml.save(erro);
 
         URI uri = ServletUriComponentsBuilder

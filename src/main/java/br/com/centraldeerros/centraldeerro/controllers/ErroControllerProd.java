@@ -25,7 +25,8 @@ public class ErroControllerProd {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ErroDesenvolvimento> save(@Valid @RequestBody ErroProducao erro){
+    public ResponseEntity<ErroDesenvolvimento> save(@Valid @RequestBody ErroProducao erro,  @RequestHeader(name = "Authorization") String token){
+        erro.setToken(token);
         ErroProducao erroSalvo = erroServiceProd.save(erro);
 
         URI uri = ServletUriComponentsBuilder

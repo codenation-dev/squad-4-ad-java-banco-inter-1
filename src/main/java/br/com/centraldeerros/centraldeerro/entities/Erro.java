@@ -79,4 +79,6 @@ public class Erro {
         this.versaoPlataforma = erro.getVersaoPlataforma();
     }
 
+
+
 }
