@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ErroControllerProd {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ErroDesenvolvimento> save(@RequestBody ErroProducao erro){
+    public ResponseEntity<ErroDesenvolvimento> save(@Valid @RequestBody ErroProducao erro){
         ErroProducao erroSalvo = erroServiceProd.save(erro);
 
         URI uri = ServletUriComponentsBuilder
@@ -38,7 +39,7 @@ public class ErroControllerProd {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ErroProducao erro){
+    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody ErroProducao erro){
         erroServiceProd.update(id, erro);
         return ResponseEntity.noContent().build();
     }

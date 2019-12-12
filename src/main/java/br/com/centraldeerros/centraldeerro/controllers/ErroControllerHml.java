@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ErroControllerHml {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ErroHomologacao> save(@RequestBody ErroHomologacao erro){
+    public ResponseEntity<ErroHomologacao> save(@Valid @RequestBody ErroHomologacao erro){
         ErroHomologacao erroSalvo = erroServiceHml.save(erro);
 
         URI uri = ServletUriComponentsBuilder
@@ -39,7 +40,7 @@ public class ErroControllerHml {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ErroHomologacao erro){
+    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody ErroHomologacao erro){
         erroServiceHml.update(id, erro);
         return ResponseEntity.noContent().build();
     }

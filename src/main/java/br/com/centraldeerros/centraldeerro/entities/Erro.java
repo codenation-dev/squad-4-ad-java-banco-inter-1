@@ -29,7 +29,7 @@ public class Erro {
     private String level;
 
     @Column
-    @Length(min = 1, message = "Quantidade de eventos menor que 1")
+    @Min(value = 1, message = "Quantidade de eventos menor que 1")
     private Long quantidadeDeEventos;
 
 
@@ -49,7 +49,7 @@ public class Erro {
     @Column
     @NotNull(message = "Data da ocorrência do erro não especificada")
     @NotBlank(message = "Data da ocorrência do erro em branco")
-    
+
     private String dataOcorrencia;
 
     @Column
