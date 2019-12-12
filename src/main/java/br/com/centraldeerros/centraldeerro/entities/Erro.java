@@ -70,6 +70,13 @@ public class Erro {
     public void update(Erro erro){
         this.level = erro.getLevel();
         this.quantidadeDeEventos = erro.getQuantidadeDeEventos();
+        this.titulo = erro.getTitulo();
+        this.detalhes = erro.getDetalhes();
+        this.origem = erro.getOrigem();
+        this.dataOcorrencia = erro.getDataOcorrencia();
+        this.dataEnvioOcorrencia = erro.getDataEnvioOcorrencia();
+        this.plataforma = erro.getPlataforma();
+        this.versaoPlataforma = erro.getVersaoPlataforma();
     }
 
 }
