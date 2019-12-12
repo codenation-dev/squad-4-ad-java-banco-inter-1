@@ -1,5 +1,6 @@
 package br.com.centraldeerros.centraldeerro.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,12 +50,12 @@ public class Erro {
 
     @Column
     @NotNull(message = "Data da ocorrência do erro não especificada")
-    @NotBlank(message = "Data da ocorrência do erro em branco")
-
-    private String dataOcorrencia;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dataOcorrencia;
 
     @Column
-    private String dataEnvioOcorrencia;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dataEnvioOcorrencia;
 
     // revisar esse atributo
     @Column
