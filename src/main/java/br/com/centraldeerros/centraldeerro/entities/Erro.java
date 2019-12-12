@@ -1,10 +1,7 @@
 package br.com.centraldeerros.centraldeerro.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -79,6 +76,9 @@ public class Erro {
         this.versaoPlataforma = erro.getVersaoPlataforma();
     }
 
+    public void changeToken(String token){
+        this.token = token.split(" ")[1];
+    }
 
 
 }

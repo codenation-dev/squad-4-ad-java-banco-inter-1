@@ -30,7 +30,7 @@ public class ErroControllerDev {
     @PostMapping
     @Transactional
     public ResponseEntity<ErroDesenvolvimento> save(@Valid @RequestBody ErroDesenvolvimento erro, @RequestHeader(name = "Authorization") String token){
-        erro.setToken(token);
+        erro.changeToken(token);
         ErroDesenvolvimento erroSalvo = erroServiceDev.save(erro);
 
         URI uri = ServletUriComponentsBuilder

@@ -28,7 +28,7 @@ public class ErroControllerHml {
     @PostMapping
     @Transactional
     public ResponseEntity<ErroHomologacao> save(@Valid @RequestBody ErroHomologacao erro, @RequestHeader(name = "Authorization") String token){
-        erro.setToken(token);
+        erro.changeToken(token);
         ErroHomologacao erroSalvo = erroServiceHml.save(erro);
 
         URI uri = ServletUriComponentsBuilder
