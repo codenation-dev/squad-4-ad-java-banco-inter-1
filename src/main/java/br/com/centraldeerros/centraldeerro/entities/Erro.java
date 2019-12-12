@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -22,17 +24,18 @@ public class Erro {
     private Long id;
 
     @Column
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Level do erro nulo")
+    @NotBlank(message = "Level do erro em branco")
     private String level;
 
     @Column
+    @Length(min = 1, message = "Quantidade de eventos menor que 1")
     private Long quantidadeDeEventos;
 
 
     @Column
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Titulo não informado")
+    @NotBlank(message = "Titulo em branco")
     private String titulo;
 
     @Column
@@ -44,8 +47,9 @@ public class Erro {
     private String origem;
 
     @Column
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Data da ocorrência do erro não especificada")
+    @NotBlank(message = "Data da ocorrência do erro em branco")
+    
     private String dataOcorrencia;
 
     @Column
