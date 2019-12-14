@@ -1,13 +1,14 @@
 package br.com.centraldeerros.centraldeerro.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,17 +23,18 @@ public class Erro {
     private Long id;
 
     @Column
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Level do erro nulo")
+    @NotBlank(message = "Level do erro em branco")
     private String level;
 
     @Column
+    @Min(value = 1, message = "Quantidade de eventos menor que 1")
     private Long quantidadeDeEventos;
 
 
     @Column
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Titulo não informado")
+    @NotBlank(message = "Titulo em branco")
     private String titulo;
 
     @Column
@@ -44,12 +46,13 @@ public class Erro {
     private String origem;
 
     @Column
-    @NotNull
-    @NotBlank
-    private String dataOcorrencia;
+    @NotNull(message = "Data da ocorrência do erro não especificada")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dataOcorrencia;
 
     @Column
-    private String dataEnvioOcorrencia;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dataEnvioOcorrencia;
 
     // revisar esse atributo
     @Column
@@ -64,6 +67,18 @@ public class Erro {
     public void update(Erro erro){
         this.level = erro.getLevel();
         this.quantidadeDeEventos = erro.getQuantidadeDeEventos();
+        this.titulo = erro.getTitulo();
+        this.detalhes = erro.getDetalhes();
+        this.origem = erro.getOrigem();
+        this.dataOcorrencia = erro.getDataOcorrencia();
+        this.dataEnvioOcorrencia = erro.getDataEnvioOcorrencia();
+        this.plataforma = erro.getPlataforma();
+        this.versaoPlataforma = erro.getVersaoPlataforma();
     }
+
+    public void changeToken(String token){
+        this.token = token.split(" ")[1];
+    }
+
 
 }

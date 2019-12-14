@@ -4,12 +4,14 @@ import br.com.centraldeerros.centraldeerro.entities.Erro;
 import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceDev;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/erros/dev")
 @Component
+@Profile("dev")
 public class ErroControllerDev {
 
     private ErroServiceDev erroServiceDev;
@@ -28,7 +31,8 @@ public class ErroControllerDev {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ErroDesenvolvimento> save(@RequestBody ErroDesenvolvimento erro){
+    public ResponseEntity<ErroDesenvolvimento> save(@Valid @RequestBody ErroDesenvolvimento erro, @RequestHeader(name = "Authorization") String token){
+        erro.changeToken(token);
         ErroDesenvolvimento erroSalvo = erroServiceDev.save(erro);
 
         URI uri = ServletUriComponentsBuilder
@@ -37,7 +41,21 @@ public class ErroControllerDev {
                     .buildAndExpand(erroSalvo.getId())
                     .toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(erroSalvo);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody ErroDesenvolvimento erro){
+        erroServiceDev.update(id, erro);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        erroServiceDev.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
@@ -46,9 +64,23 @@ public class ErroControllerDev {
         return ResponseEntity.ok(erroServiceDev.findById(id).get());
     }
 
-    @GetMapping
+    @GetMapping("/level")
     @Transactional
-    public List<ErroDesenvolvimento> findByLevel(@RequestBody String level){
-        return erroServiceDev.findByLevel(level);
+    public ResponseEntity<List<ErroDesenvolvimento>> findByLevel(@RequestBody String level){
+        return ResponseEntity.ok(this.erroServiceDev.findByLevel(level));
     }
+
+    @GetMapping("/detalhes")
+    @Transactional
+    public ResponseEntity<List<ErroDesenvolvimento>> findByDetalhes(@RequestBody String detalhes){
+        return ResponseEntity.ok(erroServiceDev.findByDetalhes(detalhes));
+    }
+
+    @GetMapping("/origem")
+    @Transactional
+    public ResponseEntity<List<ErroDesenvolvimento>> findByOrigem(@RequestBody String findByOrigem){
+        return ResponseEntity.ok(erroServiceDev.findByOrigem(findByOrigem));
+    }
+
+
 }
