@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.TimeZone;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,11 +48,11 @@ public class Erro {
 
     @Column
     @NotNull(message = "Data da ocorrência do erro não especificada")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataOcorrencia;
 
     @Column
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataEnvioOcorrencia;
 
     // revisar esse atributo
