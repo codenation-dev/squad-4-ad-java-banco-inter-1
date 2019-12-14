@@ -5,7 +5,9 @@ import br.com.centraldeerros.centraldeerro.entities.ErroHomologacao;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceHml;
 import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,6 +18,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/erros/hml")
+@Component
+@Profile("hml")
 public class ErroControllerHml {
 
     private ErroServiceHml erroServiceHml;
@@ -37,7 +41,7 @@ public class ErroControllerHml {
                     .buildAndExpand(erroSalvo.getId())
                     .toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(erroSalvo);
     }
 
     @PutMapping("/{id}")

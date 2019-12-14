@@ -4,7 +4,9 @@ import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.entities.ErroProducao;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceProd;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -15,6 +17,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/erros/prod")
+@Component
+@Profile("prod")
 public class ErroControllerProd {
     private ErroServiceProd erroServiceProd;
 
@@ -25,17 +29,17 @@ public class ErroControllerProd {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ErroDesenvolvimento> save(@Valid @RequestBody ErroProducao erro,  @RequestHeader(name = "Authorization") String token){
+    public ResponseEntity<ErroProducao> save(@Valid @RequestBody ErroProducao erro,  @RequestHeader(name = "Authorization") String token){
         erro.changeToken(token);
         ErroProducao erroSalvo = erroServiceProd.save(erro);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("{/id}")
+                .path("/{id}")
                 .buildAndExpand(erroSalvo.getId())
                 .toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(erroSalvo);
     }
 
     @PutMapping("/{id}")

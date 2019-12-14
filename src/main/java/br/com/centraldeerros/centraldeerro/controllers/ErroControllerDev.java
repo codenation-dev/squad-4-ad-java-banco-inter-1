@@ -4,6 +4,7 @@ import br.com.centraldeerros.centraldeerro.entities.Erro;
 import br.com.centraldeerros.centraldeerro.entities.ErroDesenvolvimento;
 import br.com.centraldeerros.centraldeerro.services.ErroServiceDev;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/erros/dev")
 @Component
+@Profile("dev")
 public class ErroControllerDev {
 
     private ErroServiceDev erroServiceDev;
@@ -39,7 +41,7 @@ public class ErroControllerDev {
                     .buildAndExpand(erroSalvo.getId())
                     .toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(erroSalvo);
     }
 
     @PutMapping("/{id}")
