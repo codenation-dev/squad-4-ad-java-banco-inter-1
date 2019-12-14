@@ -37,7 +37,7 @@ public class ErroControllerDev {
 
         URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
-                    .path("{/id}")
+                    .path("/{id}")
                     .buildAndExpand(erroSalvo.getId())
                     .toUri();
 
