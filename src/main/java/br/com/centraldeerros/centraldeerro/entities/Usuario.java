@@ -1,12 +1,18 @@
 package br.com.centraldeerros.centraldeerro.entities;
 
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,40 +32,63 @@ public class Usuario implements UserDetails {
     private String nome;
 
     @NotEmpty
+    @UniqueElements
     @Column(unique = true)
     private String username;
 
     @NotEmpty
     private String password;
 
+    @NotEmpty
+    @NotNull
+    @Email
+    private String email;
+
+    @NotEmpty
+    @NotNull
+    private String codRecuperarSenha;
+
+    @NotNull
+    private boolean ativo;
+
+    @NotNull
+    private boolean admin;
+
+    private Date dataHoraCriacao;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_ADMIN");
+        List<GrantedAuthority> authorityListUser = AuthorityUtils.createAuthorityList("ROLE_USER");
+        return this.isAdmin() ? authorityListAdmin : authorityListUser;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.ativo;
     }
 
     public Usuario(Usuario user) {
         this.nome = user.getNome();
         this.username = user.getUsername();
         this.password = user.getPassword();
+        this.ativo = user.isAtivo();
+        this.admin = user.isAdmin();
+
     }
 }

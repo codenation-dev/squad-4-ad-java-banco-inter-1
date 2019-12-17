@@ -1,4 +1,4 @@
-package br.com.centraldeerros.centraldeerro.Configurations;
+package br.com.centraldeerros.centraldeerro.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class SwaggerConfig {
                 .globalOperationParameters(Arrays.asList( //ADICIONA PARAMETROS GLOBAIS EM TODOS OS ENDPOINTS
                         new ParameterBuilder()
                                 .name("Authorization") //NOME DO PARAMETRO
-                                .description("Header para token JWT") //DESCRICAO
+                                .description("Header para Token OAUTH") //DESCRICAO
                                 .modelRef(new ModelRef("string")) //O TIPO DELE
                                 .parameterType("header") //ONDE ELE SERÁ ENVIADO
                                 .required(false) //SE É NECESSÁRIO

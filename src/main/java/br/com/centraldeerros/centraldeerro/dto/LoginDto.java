@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
