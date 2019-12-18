@@ -17,6 +17,8 @@ public interface LogErroService {
 
     Page<LogErro> findByTipoErro(Pageable pageable, Long tipoErro);
 
+    Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, Long tipoErro, Boolean arquivado);
+
     LogErro findById(Long id);
 
     void delete(Long id);

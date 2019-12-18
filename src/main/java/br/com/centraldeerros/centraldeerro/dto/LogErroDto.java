@@ -38,7 +38,6 @@ public class LogErroDto {
     @NotBlank
     private String ip;
 
-
     private String plataformaOrigemErro;
 
     private String versaoPlataforma;

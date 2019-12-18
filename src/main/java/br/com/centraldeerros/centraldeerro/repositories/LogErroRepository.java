@@ -19,8 +19,11 @@ public interface LogErroRepository extends JpaRepository<LogErro, Long> {
 
     Page<LogErro> findByArquivado(Pageable pageable, Boolean arquivado);
 
+    Page<LogErro> findByTipoErro(Pageable pageable, Long tipoErro);
+
     //@Modifying
     //@Query("UPDATE log_erro l SET l.tipoErro = ?1 where l.id IN ?2")
     //void updateLogErroArquivadoById(Long tipoErro, Set<Long> id);
+
 
 }

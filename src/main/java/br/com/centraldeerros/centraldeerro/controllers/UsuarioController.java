@@ -26,9 +26,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-
-
-
     @PostMapping
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")

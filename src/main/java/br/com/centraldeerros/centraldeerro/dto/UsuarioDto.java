@@ -17,14 +17,18 @@ public class UsuarioDto {
 
     @NotNull
     private String nome;
+
     @NotNull
     private String userName;
+
     @NotNull
     private String senha;
+
     @NotEmpty
     @NotNull
     @Email
     private String email;
+
     @NotNull
     private boolean administrador;
 }

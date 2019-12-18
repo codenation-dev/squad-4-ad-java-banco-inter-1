@@ -32,7 +32,7 @@ public class Usuario implements UserDetails {
     private String nome;
 
     @NotEmpty
-    @UniqueElements
+    // @UniqueElements
     @Column(unique = true)
     private String username;
 
@@ -89,6 +89,5 @@ public class Usuario implements UserDetails {
         this.password = user.getPassword();
         this.ativo = user.isAtivo();
         this.admin = user.isAdmin();
-
     }
 }
