@@ -37,16 +37,18 @@ public class LogErroController {
     @PostMapping
     @Transactional
     @ApiOperation(value = "Salvar Log Erro", response = LogErro[].class)
-    public ResponseEntity<LogErro> save(@Valid @RequestBody LogErroDto logErroDto){
-        LogErro logErroAux = logErroService.save(logErroDto);
+    public ResponseEntity<LogErro> save(@Valid @RequestBody LogErroDto logErroDto, @RequestHeader(name = "Authorization") String token){
+        logErroDto.setToken(token.split(" ")[1]);
+
+        LogErro logErroSaved = logErroService.save(logErroDto);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(logErroAux.getId())
+                .buildAndExpand(logErroSaved.getId())
                 .toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(logErroSaved);
     }
 
     @GetMapping("/{id}")

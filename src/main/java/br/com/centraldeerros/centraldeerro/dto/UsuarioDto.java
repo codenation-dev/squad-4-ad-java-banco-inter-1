@@ -13,8 +13,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UsuarioDto {
 
-    private Long id;
-
     @NotNull
     private String nome;
 
@@ -29,6 +27,4 @@ public class UsuarioDto {
     @Email
     private String email;
 
-    @NotNull
-    private boolean administrador;
 }

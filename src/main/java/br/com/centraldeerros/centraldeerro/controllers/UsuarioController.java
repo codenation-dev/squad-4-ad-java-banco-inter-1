@@ -3,6 +3,7 @@ package br.com.centraldeerros.centraldeerro.controllers;
 import br.com.centraldeerros.centraldeerro.dto.LogErroDto;
 import br.com.centraldeerros.centraldeerro.dto.UsuarioDto;
 import br.com.centraldeerros.centraldeerro.entities.LogErro;
+import br.com.centraldeerros.centraldeerro.entities.Usuario;
 import br.com.centraldeerros.centraldeerro.services.interfaces.UsuarioService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class UsuarioController {
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Salvar Usuário", response = LogErro[].class)
-    public ResponseEntity<UsuarioDto> save(@Valid @RequestBody UsuarioDto usuarioDto){
+    public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioDto usuarioDto){
         return ResponseEntity.ok(usuarioService.save(usuarioDto));
     }
 

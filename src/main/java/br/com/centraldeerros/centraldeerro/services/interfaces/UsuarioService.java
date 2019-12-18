@@ -3,13 +3,11 @@ package br.com.centraldeerros.centraldeerro.services.interfaces;
 import br.com.centraldeerros.centraldeerro.dto.UsuarioDto;
 import br.com.centraldeerros.centraldeerro.entities.Usuario;
 
-import java.util.Optional;
-
 public interface UsuarioService {
 
     Usuario findById(Long id);
 
-    UsuarioDto save(UsuarioDto usuario);
+    Usuario save(UsuarioDto usuario);
 
     Boolean ativaDesativaUsuario(Long id, Boolean ativar);
 

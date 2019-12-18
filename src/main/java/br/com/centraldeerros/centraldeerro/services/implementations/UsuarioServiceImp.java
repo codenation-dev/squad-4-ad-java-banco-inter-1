@@ -8,7 +8,6 @@ import br.com.centraldeerros.centraldeerro.exceptions.UsuarioException;
 import br.com.centraldeerros.centraldeerro.repositories.UsuarioRepository;
 import br.com.centraldeerros.centraldeerro.services.interfaces.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +32,12 @@ public class UsuarioServiceImp implements UsuarioService {
     }
 
     @Override
-    public UsuarioDto save(UsuarioDto usuarioDto) {
+    public Usuario save(UsuarioDto usuarioDto) {
         Usuario usuario = new Usuario();
         LocalDateTime localDate = LocalDateTime.now();
 
         usuario.setAtivo(true);
-        usuario.setAdmin(usuarioDto.isAdministrador());
+        usuario.setAdmin(true);
         usuario.setNome(usuarioDto.getNome());
         usuario.setPassword(new BCryptPasswordEncoder().encode(usuarioDto.getSenha()));
         usuario.setUsername(usuarioDto.getUserName());
@@ -46,19 +45,19 @@ public class UsuarioServiceImp implements UsuarioService {
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setCodRecuperarSenha(GeradorNumeroAleatorio.gerarNumeroRandomico());
 
-        usuarioRepository.save(usuario);
-
-        usuarioDto.setId(usuario.getId());
+        /*usuarioDto.setId(usuario.getId());
         usuarioDto.setSenha("");
-        return usuarioDto;
+        return usuario;*/
+
+        return usuarioRepository.save(usuario);
     }
 
     @Override
     public Boolean ativaDesativaUsuario(Long id, Boolean ativar) {
-
         Usuario usuario = findById(id);
         usuario.setAtivo(ativar);
         usuarioRepository.save(usuario);
+
         return true;
     }
 

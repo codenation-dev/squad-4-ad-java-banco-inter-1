@@ -44,6 +44,8 @@ public class LogErroServiceImp implements LogErroService {
         logErro.setDescricao(logErroDto.getDescricao());
         logErro.setClassificacao(logErroDto.getClassificacao());
         logErro.setDataHoraErro(logErroDto.getDataHoraErro());
+        logErro.setToken(logErroDto.getToken());
+        logErro.setIp(logErroDto.getIp());
 
         return logErroRepository.save(logErro);
     }
