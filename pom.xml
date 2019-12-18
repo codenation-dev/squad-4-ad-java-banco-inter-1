@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.1.RELEASE</version>
+		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.centraldeerros</groupId>
-	<artifactId>CentralDeErro</artifactId>
+	<artifactId>squad-4-ad-java-banco-inter-1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CentralDeErro</name>
-	<description>Serviço Central de Erros</description>
+	<description>Projeto Log Erro</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -78,11 +78,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -90,12 +85,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<profiles>
-						<profile>dev</profile>
-						<profile>prod</profile>
-					</profiles>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
