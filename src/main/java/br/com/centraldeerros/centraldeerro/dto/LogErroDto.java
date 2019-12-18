@@ -15,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class LogErroDto {
 
+    @NotNull(message = "Data Hora do Erro Nulo")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataHoraErro;
 
@@ -34,9 +35,9 @@ public class LogErroDto {
     private String classificacao;
 
     @NotNull
-    @NotEmpty
     @NotBlank
     private String ip;
+
 
     private String plataformaOrigemErro;
 

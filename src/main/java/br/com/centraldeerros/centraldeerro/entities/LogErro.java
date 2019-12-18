@@ -23,7 +23,7 @@ public class LogErro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Data Hora do Erro Nulo")
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataHoraErro;
 
@@ -31,47 +31,40 @@ public class LogErro {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataHoraCriacao;
 
-    @NotNull
-    @NotEmpty
+    @Column
     private String erro;
 
-    @NotNull
+    @Column
     private Long tipoErro;
 
-    @NotNull
-    @NotEmpty
+    @Column
     private String descricao;
 
-    @NotNull
-    @NotEmpty
+    @Column
     private String classificacao;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @Column
     private String ip;
-    
+
+    @Column
     private String plataformaOrigemErro;
 
+    @Column
     private String versaoPlataforma;
 
-    @NotNull
-    @NotEmpty
+    @Column
     private String sistemaOperacional;
 
-    @NotNull
-    @NotEmpty
+    @Column
     private String versaoSO;
 
     @NotNull
     private Boolean arquivado;
 
-    @NotNull
+    @Column
     private Long idUsuario;
 
-    @NotBlank
-    @NotNull
-    @NotEmpty
+    @Column
     private String token;
 
     
