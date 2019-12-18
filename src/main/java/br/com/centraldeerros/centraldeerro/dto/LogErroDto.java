@@ -3,9 +3,7 @@ package br.com.centraldeerros.centraldeerro.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Getter
@@ -24,6 +22,8 @@ public class LogErroDto {
     private String erro;
 
     @NotNull
+    @Min(value = 1, message = "Inserir valor entre 1 e 3")
+    @Max(value = 3, message = "Inserir valor entre 1 e 3")
     private Long tipoErro;
 
     @NotNull

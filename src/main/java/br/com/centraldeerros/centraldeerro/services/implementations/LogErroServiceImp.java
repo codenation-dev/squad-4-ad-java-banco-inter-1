@@ -48,26 +48,31 @@ public class LogErroServiceImp implements LogErroService {
         return logErroRepository.save(logErro);
     }
 
+    @Transactional
     @Override
     public Page<LogErro> findAll(Pageable pageable) {
         return logErroRepository.findAll(pageable);
     }
 
+    @Transactional
     @Override
     public Page<LogErro> findArquivado(Pageable pageable, Boolean arquivado) {
         return logErroRepository.findByArquivado(pageable, arquivado);
     }
 
+    @Transactional
     @Override
     public Page<LogErro> findByTipoErro(Pageable pageable, Long tipoErro) {
         return logErroRepository.findByTipoErro(pageable, tipoErro);
     }
 
+    @Transactional
     @Override
     public Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, Long tipoErro, Boolean arquivado){
         return logErroRepository.findByTipoErroAndArquivado(pageable, tipoErro,arquivado);
     }
 
+    @Transactional
     @Override
     public LogErro findById(Long id) {
         return logErroRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Log de Erro não encontrado"));
