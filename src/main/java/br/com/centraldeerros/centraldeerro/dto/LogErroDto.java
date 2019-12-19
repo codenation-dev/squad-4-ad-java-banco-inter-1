@@ -31,10 +31,6 @@ public class LogErroDto {
     private String descricao;
 
     @NotNull
-    @NotEmpty
-    private String classificacao;
-
-    @NotNull
     @NotBlank
     private String ip;
 

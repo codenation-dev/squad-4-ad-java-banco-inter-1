@@ -23,7 +23,6 @@ public class LogErro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataHoraErro;
 
@@ -39,9 +38,6 @@ public class LogErro {
 
     @Column
     private String descricao;
-
-    @Column
-    private String classificacao;
 
     @Column
     private String ip;
