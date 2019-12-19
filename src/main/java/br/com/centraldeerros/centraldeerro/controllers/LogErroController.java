@@ -80,8 +80,10 @@ public class LogErroController {
     @ApiOperation(value = "Retorna Todos os Erros (Paginados)", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
     public ResponseEntity<Page<LogErro>> findAll(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                                 @RequestParam(required = false, defaultValue = "20") Integer size){
-        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
+                                                 @RequestParam(required = false, defaultValue = "20") Integer size,
+                                                 @RequestParam(required = false, defaultValue = "tipoErro") String order){
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
+
         return ResponseEntity.ok(this.logErroService.findAll(pageable));
     }
 
@@ -90,9 +92,10 @@ public class LogErroController {
     @ApiOperation(value = "Retorna Todos os Erros Arquivados (Paginados)", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
     public ResponseEntity<Page<LogErro>> findArquivados(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                                        @RequestParam(required = false, defaultValue = "20") Integer size){
+                                                        @RequestParam(required = false, defaultValue = "20") Integer size,
+                                                        @RequestParam(required = false, defaultValue = "tipoErro") String order){
 
-        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
         return ResponseEntity.ok(this.logErroService.findArquivado(pageable, Boolean.TRUE));
     }
 
@@ -101,9 +104,10 @@ public class LogErroController {
     @ApiOperation(value = "Retorna Todos os Erros Não Arquivados (Paginados)", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
     public ResponseEntity<Page<LogErro>> findNotArquivados(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                                           @RequestParam(required = false, defaultValue = "20") Integer size){
+                                                           @RequestParam(required = false, defaultValue = "20") Integer size,
+                                                           @RequestParam(required = false, defaultValue = "tipoErro") String order){
 
-        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
         return ResponseEntity.ok(this.logErroService.findArquivado(pageable, Boolean.FALSE));
     }
 
@@ -114,9 +118,10 @@ public class LogErroController {
     public ResponseEntity<Page<LogErro>> findByTipoErroAndArquivado(@PathVariable("tipoErro") Long tipoErro,
                                                                     @PathVariable("arquivado") Boolean arquivado,
                                                                     @RequestParam(required = false, defaultValue = "0") Integer page,
-                                                                    @RequestParam(required = false, defaultValue = "20") Integer size){
+                                                                    @RequestParam(required = false, defaultValue = "20") Integer size,
+                                                                    @RequestParam(required = false, defaultValue = "tipoErro") String order){
 
-        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
         return ResponseEntity.ok(this.logErroService.findByTipoErroAndArquivado(pageable, tipoErro, arquivado));
     }
 
@@ -125,8 +130,9 @@ public class LogErroController {
     @Transactional
     public ResponseEntity<Page<LogErro>> findByTipoErro(@PathVariable("tipoErro") Long tipoErro,
                                                         @RequestParam(required = false, defaultValue = "0") Integer page,
-                                                        @RequestParam(required = false, defaultValue = "20") Integer size){
-        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
+                                                        @RequestParam(required = false, defaultValue = "20") Integer size,
+                                                        @RequestParam(required = false, defaultValue = "tipoErro") String order){
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
         return ResponseEntity.ok(logErroService.findByTipoErro(pageable, tipoErro));
     }
 

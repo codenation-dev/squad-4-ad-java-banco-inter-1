@@ -24,9 +24,9 @@ public class LogErroDto {
     private String erro;
 
     @NotNull
-    @Min(value = 1, message = "Inserir valor entre 1 e 3")
-    @Max(value = 3, message = "Inserir valor entre 1 e 3")
-    private Long tipoErro;
+    @NotBlank
+    @Pattern(regexp = "debug|error|warning", flags = Pattern.Flag.CASE_INSENSITIVE)
+    private String tipoErro;
 
     @NotNull
     @NotEmpty
