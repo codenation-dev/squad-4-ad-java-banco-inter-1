@@ -1,6 +1,8 @@
 package br.com.centraldeerros.centraldeerro.dto;
 
+import br.com.centraldeerros.centraldeerro.entities.Usuario;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.validation.constraints.*;
@@ -46,12 +48,13 @@ public class LogErroDto {
     @NotEmpty
     private String versaoSO;
 
-    @NotNull
-    private Long idUsuario;
-
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @JsonIgnore
     private String token;
+
+    @JsonIgnore
+    private String nomeUsuario;
+
+    @JsonIgnore
+    private String nickName;
 
 }

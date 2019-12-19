@@ -32,7 +32,6 @@ public class Usuario implements UserDetails {
     private String nome;
 
     @NotEmpty
-    // @UniqueElements
     @Column(unique = true)
     private String username;
 
@@ -41,6 +40,7 @@ public class Usuario implements UserDetails {
 
     @NotEmpty
     @NotNull
+    @Column(unique = true)
     @Email
     private String email;
 

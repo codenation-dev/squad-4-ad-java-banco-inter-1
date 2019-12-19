@@ -34,6 +34,8 @@ public class LogErroServiceImp implements LogErroService {
 
         logErro.setArquivado(false);
         logErro.setDataHoraCriacao(Date.from(localDate.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
+        logErro.setNomeUsuario(logErroDto.getNomeUsuario());
+        logErro.setNickName(logErroDto.getNickName());
 
         logErro.setTipoErro(logErroDto.getTipoErro());
         logErro.setVersaoSO(logErroDto.getVersaoSO());
@@ -42,7 +44,6 @@ public class LogErroServiceImp implements LogErroService {
         logErro.setPlataformaOrigemErro(logErroDto.getPlataformaOrigemErro());
         logErro.setErro(logErroDto.getErro());
         logErro.setDescricao(logErroDto.getDescricao());
-        logErro.setClassificacao(logErroDto.getClassificacao());
         logErro.setDataHoraErro(logErroDto.getDataHoraErro());
         logErro.setToken(logErroDto.getToken());
         logErro.setIp(logErroDto.getIp());

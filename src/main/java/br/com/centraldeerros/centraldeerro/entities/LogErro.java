@@ -58,12 +58,11 @@ public class LogErro {
     private Boolean arquivado;
 
     @Column
-    private Long idUsuario;
+    private String nomeUsuario;
+
+    @Column
+    String nickName;
 
     @Column
     private String token;
-
-    
-
-
 }

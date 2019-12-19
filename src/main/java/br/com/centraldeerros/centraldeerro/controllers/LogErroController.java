@@ -2,6 +2,7 @@ package br.com.centraldeerros.centraldeerro.controllers;
 
 import br.com.centraldeerros.centraldeerro.dto.LogErroDto;
 import br.com.centraldeerros.centraldeerro.entities.LogErro;
+import br.com.centraldeerros.centraldeerro.entities.Usuario;
 import br.com.centraldeerros.centraldeerro.services.interfaces.LogErroService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,13 +15,18 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,6 +47,14 @@ public class LogErroController {
     @ApiOperation(value = "Salvar Log Erro", response = LogErro[].class)
     public ResponseEntity<LogErro> save(@Valid @RequestBody LogErroDto logErroDto, @RequestHeader(name = "Authorization") String token){
         logErroDto.setToken(token.split(" ")[1]);
+
+        Authentication authentication = SecurityContextHolder.getContext()
+                                            .getAuthentication();
+
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+
+        logErroDto.setNomeUsuario(usuario.getNome());
+        logErroDto.setNickName(usuario.getUsername());
 
         LogErro logErroSaved = logErroService.save(logErroDto);
 
