@@ -162,4 +162,15 @@ public class LogErroController {
         }
         return ResponseEntity.noContent().build();
     }
+
+    @ApiOperation(value = "Encontra um erro filtrado por sistema operacional", response = LogErro[].class)
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/sistema")
+    public ResponseEntity<Page<LogErro>> findBySistemaOperacional(@RequestParam String sistemaOperacional,
+                                                                  @RequestParam(required = false, defaultValue = "0") Integer page,
+                                                                  @RequestParam(required = false, defaultValue = "20") Integer size,
+                                                                  @RequestParam(required = false, defaultValue = "sistemaOperacional") String order){
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
+        return ResponseEntity.ok(logErroService.findBySistemaOperacional(pageable, sistemaOperacional));
+    }
 }

@@ -100,4 +100,10 @@ public class LogErroServiceImp implements LogErroService {
     public void arquivarList(List<Long> ids) {
         ids.forEach(this::arquivar);
     }
+
+    @Transactional
+    @Override
+    public Page<LogErro> findBySistemaOperacional(Pageable pageable, String sistemaOperacional){
+        return logErroRepository.findBySistemaOperacional(pageable, sistemaOperacional);
+    }
 }

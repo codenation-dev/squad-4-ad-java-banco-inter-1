@@ -27,5 +27,5 @@ public interface LogErroService {
 
     void arquivarList(List<Long> ids);
 
-
+    Page<LogErro> findBySistemaOperacional(Pageable pageable, String sistemaOperacional);
 }
