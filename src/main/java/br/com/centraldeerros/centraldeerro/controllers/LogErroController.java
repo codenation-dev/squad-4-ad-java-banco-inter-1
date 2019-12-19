@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -21,6 +22,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -53,7 +55,7 @@ public class LogErroController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    @ApiOperation(value = "Retorna Todos os Erros (Paginados)", response = LogErro[].class)
+    @ApiOperation(value = "Retorna Erro por Id", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
     public ResponseEntity<LogErro> findById(@PathVariable Long id){
         return ResponseEntity.ok(this.logErroService.findById(id));
@@ -63,9 +65,9 @@ public class LogErroController {
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Retorna Todos os Erros (Paginados)", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
-    public ResponseEntity<Page<LogErro>> findAll(@ApiIgnore @PageableDefault(sort = "id",
-                                                         direction = Sort.Direction.DESC,
-                                                         page = 0, size = 20) Pageable pageable){
+    public ResponseEntity<Page<LogErro>> findAll(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                 @RequestParam(required = false, defaultValue = "20") Integer size){
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
         return ResponseEntity.ok(this.logErroService.findAll(pageable));
     }
 
@@ -73,9 +75,10 @@ public class LogErroController {
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Retorna Todos os Erros Arquivados (Paginados)", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
-    public ResponseEntity<Page<LogErro>> findArquivados(@ApiIgnore @PageableDefault(sort = "id",
-            direction = Sort.Direction.DESC,
-            page = 0, size = 20) Pageable pageable){
+    public ResponseEntity<Page<LogErro>> findArquivados(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                        @RequestParam(required = false, defaultValue = "20") Integer size){
+
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
         return ResponseEntity.ok(this.logErroService.findArquivado(pageable, Boolean.TRUE));
     }
 
@@ -83,9 +86,10 @@ public class LogErroController {
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Retorna Todos os Erros Não Arquivados (Paginados)", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
-    public ResponseEntity<Page<LogErro>> findNotArquivados(@ApiIgnore @PageableDefault(sort = "id",
-            direction = Sort.Direction.DESC,
-            page = 0, size = 20) Pageable pageable){
+    public ResponseEntity<Page<LogErro>> findNotArquivados(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                           @RequestParam(required = false, defaultValue = "20") Integer size){
+
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
         return ResponseEntity.ok(this.logErroService.findArquivado(pageable, Boolean.FALSE));
     }
 
@@ -93,39 +97,49 @@ public class LogErroController {
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Retorna Erros Paginados por Tipo de Erro", response = LogErro[].class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Log de Erros paginados"), @ApiResponse(code = 500, message = "Internal server error")})
-    public ResponseEntity<Page<LogErro>> findByTipoErroAndArquivado(@PathVariable("tipoErro") Long tipoErro, @PathVariable("arquivado") Boolean arquivado,
-                                                                    @ApiIgnore @PageableDefault(sort = "id",
-                                                                            direction = Sort.Direction.DESC,
-                                                                            page = 0, size = 20) Pageable pageable){
+    public ResponseEntity<Page<LogErro>> findByTipoErroAndArquivado(@PathVariable("tipoErro") Long tipoErro,
+                                                                    @PathVariable("arquivado") Boolean arquivado,
+                                                                    @RequestParam(required = false, defaultValue = "0") Integer page,
+                                                                    @RequestParam(required = false, defaultValue = "20") Integer size){
+
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
         return ResponseEntity.ok(this.logErroService.findByTipoErroAndArquivado(pageable, tipoErro, arquivado));
     }
 
     @GetMapping("/tipoErro/{tipoErro}")
+    @ApiOperation(value = "Retorna Erros Paginados por Tipo de Erro", response = LogErro[].class)
     @Transactional
     public ResponseEntity<Page<LogErro>> findByTipoErro(@PathVariable("tipoErro") Long tipoErro,
-                                                            @ApiIgnore @PageableDefault(sort = "id",
-                                                                        direction = Sort.Direction.DESC,
-                                                                        page = 0, size = 20) Pageable pageable){
+                                                        @RequestParam(required = false, defaultValue = "0") Integer page,
+                                                        @RequestParam(required = false, defaultValue = "20") Integer size){
+        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("id")));
         return ResponseEntity.ok(logErroService.findByTipoErro(pageable, tipoErro));
     }
 
+    /*
     @ApiOperation(value = "Arquivar erro.", response = LogErro[].class)
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> arquivar(@PathVariable Long id){
+    @PutMapping("/arquivar")
+    public ResponseEntity<Void> arquivar(@RequestParam Long id){
         logErroService.arquivar(id);
         return ResponseEntity.noContent().build();
     }
+     */
 
-    @ApiOperation(value = "Arquivar Lista de Erros", response = LogErro[].class)
+    @ApiOperation(value = "Arquivar Um ou vários Erros", response = LogErro[].class)
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/arquivarVarios")
-    public ResponseEntity<Void> arquivarVarios(@RequestParam List<Long> ids){
-        logErroService.arquivarList(ids);
+    @PutMapping("/arquivar")
+    public ResponseEntity<Void> arquivar(@RequestParam(required = false, defaultValue = "0") Long id,
+                                               @RequestParam(required = false) List<Long> ids){
+
+        if(id > 0) {
+            logErroService.arquivar(id);
+            return ResponseEntity.noContent().build();
+        }
+        if(!(Objects.isNull(ids) || ids.size() <= 0)) {
+            logErroService.arquivarList(ids);
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.noContent().build();
     }
-
-
-
-
 }
