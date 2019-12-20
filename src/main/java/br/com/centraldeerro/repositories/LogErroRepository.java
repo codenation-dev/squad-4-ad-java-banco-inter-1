@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LogErroRepository extends JpaRepository<LogErro, Long> {
 
-    Page<LogErro> findByTipoErro(Pageable pageable, Long tipoErro);
+    Page<LogErro> findByTipoErro(Pageable pageable, String tipoErro);
 
-    Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, Long tipoErro, Boolean arquivado);
+    Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, String tipoErro, Boolean arquivado);
 
     Page<LogErro> findBySistemaOperacional(Pageable pageable, String sistemaOperacional);
 

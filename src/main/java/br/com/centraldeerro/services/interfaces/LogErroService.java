@@ -16,9 +16,9 @@ public interface LogErroService {
 
     Page<LogErro> findArquivado(Pageable pageable, Boolean arquivado);
 
-    Page<LogErro> findByTipoErro(Pageable pageable, Long tipoErro);
+    Page<LogErro> findByTipoErro(Pageable pageable, String tipoErro);
 
-    Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, Long tipoErro, Boolean arquivado);
+    Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, String tipoErro, Boolean arquivado);
 
     Page<LogErro> findBySistemaOperacional(Pageable pageable, String sistemaOperacional);
 

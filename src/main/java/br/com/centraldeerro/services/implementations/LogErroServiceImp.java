@@ -66,14 +66,14 @@ public class LogErroServiceImp implements LogErroService {
 
     @Transactional
     @Override
-    public Page<LogErro> findByTipoErro(Pageable pageable, Long tipoErro) {
+    public Page<LogErro> findByTipoErro(Pageable pageable, String tipoErro) {
         return logErroRepository.findByTipoErro(pageable, tipoErro);
     }
 
     @Transactional
     @Override
-    public Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, Long tipoErro, Boolean arquivado){
-        return logErroRepository.findByTipoErroAndArquivado(pageable, tipoErro,arquivado);
+    public Page<LogErro> findByTipoErroAndArquivado(Pageable pageable, String tipoErro, Boolean arquivado){
+        return logErroRepository.findByTipoErroAndArquivado(pageable, tipoErro, arquivado);
     }
 
     @Transactional
