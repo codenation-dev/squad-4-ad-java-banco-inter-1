@@ -156,10 +156,11 @@ public class LogErroController {
     @Transactional
     public ResponseEntity<Page<LogErro>> findArquivados(@RequestParam(required = false, defaultValue = "0") Integer page,
                                                         @RequestParam(required = false, defaultValue = "20") Integer size,
-                                                        @RequestParam(required = false, defaultValue = "tipoErro") String order){
+                                                        @RequestParam(required = false, defaultValue = "tipoErro") String order,
+                                                        @RequestParam(required = false, defaultValue = "true") Boolean arquivado){
 
         Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
-        return ResponseEntity.ok(this.logErroService.findArquivado(pageable, Boolean.TRUE));
+        return ResponseEntity.ok(this.logErroService.findArquivado(pageable, arquivado));
     }
 
     @DeleteMapping("/{id}")
@@ -172,18 +173,6 @@ public class LogErroController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/notArquivados")
-    @PreAuthorize("hasRole('ADMIN')")
-    @ApiOperation(value = "Retorna Todos os Erros Não Arquivados (Paginados)", response = LogErro[].class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
-    @Transactional
-    public ResponseEntity<Page<LogErro>> findNotArquivados(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                                           @RequestParam(required = false, defaultValue = "20") Integer size,
-                                                           @RequestParam(required = false, defaultValue = "tipoErro") String order){
-
-        Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc(order)));
-        return ResponseEntity.ok(this.logErroService.findArquivado(pageable, Boolean.FALSE));
-    }
 
     @PutMapping("/arquivar")
     @ApiOperation(value = "Arquivar Um ou vários Erros", response = LogErro[].class)

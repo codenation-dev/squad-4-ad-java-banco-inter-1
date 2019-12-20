@@ -12,7 +12,6 @@ public class ErroNotFoundHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> exception(ResourceNotFoundException exception){
-        return ResponseEntity.badRequest().body("Erro não encontrado");
-        //exception.getMessage()
+        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 }
