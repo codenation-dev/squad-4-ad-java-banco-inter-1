@@ -11,7 +11,7 @@ public interface UsuarioService {
 
     Boolean ativaDesativaUsuario(Long id, Boolean ativar);
 
-    void alterarSenha(String username, String newPassword, String newPasswordRepet, String codVerificacao);
+    String alterarSenha(String username, String newPassword, String newPasswordRepet, String codVerificacao);
 
-    void envairCodVerificacaoPorEmail(String email);
+    String envairCodVerificacaoPorEmail(String email);
 }

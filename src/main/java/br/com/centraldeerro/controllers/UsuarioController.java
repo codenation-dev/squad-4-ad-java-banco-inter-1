@@ -42,19 +42,18 @@ public class UsuarioController {
     @ApiOperation(value = "Alterar senha.", response = LogErro[].class)
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/changePassword")
-    public ResponseEntity<Void> alterarSenha(@RequestParam String username,
-                                             @RequestParam String newPassword,
-                                             @RequestParam String newPasswordRepet,
-                                             @RequestParam String codVerificacao){
-        usuarioService.alterarSenha(username, newPassword, newPasswordRepet, codVerificacao);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> alterarSenha(@RequestParam String username,
+                                               @RequestParam String newPassword,
+                                               @RequestParam String newPasswordRepet,
+                                               @RequestParam String codVerificacao){
+        return ResponseEntity.ok(usuarioService.alterarSenha(username, newPassword, newPasswordRepet, codVerificacao));
+
     }
 
     @ApiOperation(value = "Enviar código de alteração por e-mail.", response = LogErro[].class)
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/sendCodAlterPassword")
-    public ResponseEntity<Void> enviarCodVerificacaoPorEmail(@RequestParam String email){
-        usuarioService.envairCodVerificacaoPorEmail(email);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> enviarCodVerificacaoPorEmail(@RequestParam String email){
+        return ResponseEntity.ok(usuarioService.envairCodVerificacaoPorEmail(email));
     }
 }
