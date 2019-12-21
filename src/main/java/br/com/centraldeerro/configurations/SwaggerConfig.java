@@ -44,7 +44,7 @@ public class SwaggerConfig {
                 .title("Spring Boot Codenation Central de Erros")
                 .description("The best spring course out there")
                 .version("1.0")
-                .contact(new Contact("Lucas/Marcos/Maycon", "url", "email@email.com"))
+                .contact(new Contact("Lucas \\Maycon\\ Marcos", "url", "centraldeerros@gmail.com"))
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/license/LICENSE-2.0")
                 .build();

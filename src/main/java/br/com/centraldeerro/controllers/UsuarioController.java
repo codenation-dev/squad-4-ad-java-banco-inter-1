@@ -26,20 +26,19 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    @PreAuthorize("hasRole('ADMIN')")
-    @ApiOperation(value = "Salvar Usuário", response = LogErro[].class)
+    @ApiOperation(value = "Salvar Usuário", response = Usuario.class)
     public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioDto usuarioDto){
         return ResponseEntity.ok(usuarioService.save(usuarioDto));
     }
 
-    @ApiOperation(value = "Ativa/Desativar usuário.", response = LogErro[].class)
+    @ApiOperation(value = "Ativa/Desativar usuário.", response = Usuario.class)
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/enableDesableUser")
     public ResponseEntity<Boolean> desativar(@RequestParam Long id, @RequestParam Boolean ativo){
         return ResponseEntity.ok(usuarioService.ativaDesativaUsuario(id,ativo));
     }
 
-    @ApiOperation(value = "Alterar senha.", response = LogErro[].class)
+    @ApiOperation(value = "Alterar senha.", response = Usuario.class)
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/changePassword")
     public ResponseEntity<String> alterarSenha(@RequestParam String username,
@@ -50,7 +49,7 @@ public class UsuarioController {
 
     }
 
-    @ApiOperation(value = "Enviar código de alteração por e-mail.", response = LogErro[].class)
+    @ApiOperation(value = "Enviar código de alteração por e-mail.", response = Usuario.class)
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/sendCodAlterPassword")
     public ResponseEntity<String> enviarCodVerificacaoPorEmail(@RequestParam String email){

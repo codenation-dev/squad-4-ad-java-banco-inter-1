@@ -38,7 +38,7 @@ public class LogErroController {
 
     @PostMapping
 
-    @ApiOperation(value = "Salvar Log Erro", response = LogErro[].class)
+    @ApiOperation(value = "Salvar Log Erro", response = LogErro.class)
     @ApiResponses(value =  {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
     @Transactional
     public ResponseEntity<LogErro> save(@Valid @RequestBody LogErroDto logErroDto, @RequestHeader(name = "Authorization") String token){
@@ -65,8 +65,8 @@ public class LogErroController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    @ApiOperation(value = "Retorna Erro por Id", response = LogErro[].class)
-    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiOperation(value = "Retorna Erro por Id", response = LogErro.class)
+    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @Transactional
     public ResponseEntity<LogErro> findById(@PathVariable Long id){
         return ResponseEntity.ok(this.logErroService.findById(id));
@@ -75,8 +75,8 @@ public class LogErroController {
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Retorna Todos os Erros (Paginados)", response = LogErro[].class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Retorno com sucesso"),
-                            @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successful Request"),
+                            @ApiResponse(code = 500, message = "Internal error server")})
     @Transactional
     public ResponseEntity<Page<LogErro>> findAll(@RequestParam(required = false, defaultValue = "0") Integer page,
                                                  @RequestParam(required = false, defaultValue = "20") Integer size,
@@ -89,7 +89,7 @@ public class LogErroController {
     @GetMapping("/tipoErroArquivado/")
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Retorna Erros Paginados por Tipo de Erro", response = LogErro[].class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @Transactional
     public ResponseEntity<Page<LogErro>> findByTipoErroAndArquivado(@RequestParam(required = true) String tipoErro,
                                                                     @RequestParam(required = true) Boolean arquivado,
@@ -103,7 +103,7 @@ public class LogErroController {
 
     @GetMapping("/tipoErro/")
     @ApiOperation(value = "Retorna Erros Paginados por Tipo de Erro", response = LogErro[].class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @Transactional
     public ResponseEntity<Page<LogErro>> findByTipoErro(@RequestParam(required = true) String tipoErro,
                                                         @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -115,7 +115,7 @@ public class LogErroController {
 
     @GetMapping("/sistema")
     @ApiOperation(value = "Encontra um erro filtrado por sistema operacional", response = LogErro[].class)
-    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity<Page<LogErro>> findBySistemaOperacional(@RequestParam String sistemaOperacional,
@@ -128,7 +128,7 @@ public class LogErroController {
 
     @GetMapping("/plataforma")
     @ApiOperation(value = "Encontra um erro filtrado pela plataforma de origem do erro", response = LogErro[].class)
-    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity<Page<LogErro>> findByplataformaOrigemErro(@RequestParam String plataformaOrigemErro,
@@ -152,7 +152,7 @@ public class LogErroController {
     @GetMapping("/arquivados")
     @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Retorna Todos os Erros Arquivados (Paginados)", response = LogErro[].class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @Transactional
     public ResponseEntity<Page<LogErro>> findArquivados(@RequestParam(required = false, defaultValue = "0") Integer page,
                                                         @RequestParam(required = false, defaultValue = "20") Integer size,
@@ -165,8 +165,8 @@ public class LogErroController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    @ApiOperation(value = "Deleta um erro pelo seu id", response = LogErro[].class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiOperation(value = "Deleta um erro pelo seu id")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @Transactional
     public ResponseEntity<Void> delete(@PathVariable("id") Long id){
         logErroService.delete(id);
@@ -175,8 +175,8 @@ public class LogErroController {
 
 
     @PutMapping("/arquivar")
-    @ApiOperation(value = "Arquivar Um ou vários Erros", response = LogErro[].class)
-    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Retorno com sucesso"), @ApiResponse(code = 500, message = "Erro interno de servidor")})
+    @ApiOperation(value = "Arquivar Um ou vários Erros")
+    @ApiResponses(value =  {@ApiResponse(code = 200, message = "Successful Request"), @ApiResponse(code = 500, message = "Internal error server")})
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity<Void> arquivar(@RequestParam(required = false, defaultValue = "0") Long id,
