@@ -1,5 +1,6 @@
 package br.com.centraldeerro.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -53,6 +54,7 @@ public class Usuario implements UserDetails {
     @NotNull
     private boolean admin;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataHoraCriacao;
 
     @Override

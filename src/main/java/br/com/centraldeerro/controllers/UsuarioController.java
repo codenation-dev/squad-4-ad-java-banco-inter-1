@@ -26,6 +26,7 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Salvar Usuário", response = Usuario.class)
     public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioDto usuarioDto){
         return ResponseEntity.ok(usuarioService.save(usuarioDto));
