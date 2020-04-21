@@ -1,7 +1,7 @@
 package br.com.centraldeerro.services.interfaces;
 
-import br.com.centraldeerro.dto.UsuarioDto;
-import br.com.centraldeerro.entities.Usuario;
+import br.com.centraldeerro.models.entities.dto.UsuarioDto;
+import br.com.centraldeerro.models.entities.Usuario;
 
 public interface UsuarioService {
 

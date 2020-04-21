@@ -1,7 +1,8 @@
 package br.com.centraldeerro.services.implementations;
 
-import br.com.centraldeerro.dto.LogErroDto;
-import br.com.centraldeerro.entities.LogErro;
+import br.com.centraldeerro.models.entities.builders.LogErroBuilder;
+import br.com.centraldeerro.models.entities.dto.LogErroDto;
+import br.com.centraldeerro.models.entities.LogErro;
 import br.com.centraldeerro.exceptions.ResourceNotFoundException;
 import br.com.centraldeerro.repositories.LogErroRepository;
 import br.com.centraldeerro.services.interfaces.LogErroService;
@@ -29,26 +30,7 @@ public class LogErroServiceImp implements LogErroService {
     @Transactional
     @Override
     public LogErro save(LogErroDto logErroDto) {
-        LogErro logErro = new LogErro();
-        LocalDateTime localDate = LocalDateTime.now();
-
-        logErro.setArquivado(false);
-        logErro.setDataHoraCriacao(Date.from(localDate.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
-        logErro.setNomeUsuario(logErroDto.getNomeUsuario());
-        logErro.setNickName(logErroDto.getNickName());
-
-        logErro.setTipoErro(logErroDto.getTipoErro());
-        logErro.setVersaoSO(logErroDto.getVersaoSO());
-        logErro.setVersaoPlataforma(logErroDto.getVersaoPlataforma());
-        logErro.setSistemaOperacional(logErroDto.getSistemaOperacional());
-        logErro.setPlataformaOrigemErro(logErroDto.getPlataformaOrigemErro());
-        logErro.setErro(logErroDto.getErro());
-        logErro.setDescricao(logErroDto.getDescricao());
-        logErro.setDataHoraErro(logErroDto.getDataHoraErro());
-        logErro.setToken(logErroDto.getToken());
-        logErro.setIp(logErroDto.getIp());
-
-        return logErroRepository.save(logErro);
+        return logErroRepository.save(LogErroBuilder.CriarLogErro(logErroDto));
     }
 
     @Transactional

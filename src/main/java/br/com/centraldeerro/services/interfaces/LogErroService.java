@@ -1,10 +1,9 @@
 package br.com.centraldeerro.services.interfaces;
 
-import br.com.centraldeerro.dto.LogErroDto;
-import br.com.centraldeerro.entities.LogErro;
+import br.com.centraldeerro.models.entities.dto.LogErroDto;
+import br.com.centraldeerro.models.entities.LogErro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 

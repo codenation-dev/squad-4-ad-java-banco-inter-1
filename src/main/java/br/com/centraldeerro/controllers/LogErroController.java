@@ -1,8 +1,8 @@
 package br.com.centraldeerro.controllers;
 
-import br.com.centraldeerro.dto.LogErroDto;
-import br.com.centraldeerro.entities.Usuario;
-import br.com.centraldeerro.entities.LogErro;
+import br.com.centraldeerro.models.entities.dto.LogErroDto;
+import br.com.centraldeerro.models.entities.Usuario;
+import br.com.centraldeerro.models.entities.LogErro;
 import br.com.centraldeerro.services.interfaces.LogErroService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
