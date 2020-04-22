@@ -1,10 +1,10 @@
 package br.com.centraldeerro.services.implementations;
 
 import br.com.centraldeerro.Utils.GeradorNumeroAleatorio;
-import br.com.centraldeerro.dto.UsuarioDto;
-import br.com.centraldeerro.entities.Usuario;
+import br.com.centraldeerro.models.entities.builders.UsuarioBuilder;
+import br.com.centraldeerro.models.entities.dto.UsuarioDto;
+import br.com.centraldeerro.models.entities.Usuario;
 import br.com.centraldeerro.exceptions.ResourceNotFoundException;
-import br.com.centraldeerro.exceptions.UsuarioException;
 import br.com.centraldeerro.repositories.UsuarioRepository;
 import br.com.centraldeerro.services.interfaces.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,23 +35,7 @@ public class UsuarioServiceImp implements UsuarioService {
 
     @Override
     public Usuario save(UsuarioDto usuarioDto) {
-        Usuario usuario = new Usuario();
-        LocalDateTime localDate = LocalDateTime.now();
-
-        usuario.setAtivo(true);
-        usuario.setAdmin(true);
-        usuario.setNome(usuarioDto.getNome());
-        usuario.setPassword(new BCryptPasswordEncoder().encode(usuarioDto.getSenha()));
-        usuario.setUsername(usuarioDto.getUserName());
-        usuario.setDataHoraCriacao(Date.from(localDate.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
-        usuario.setEmail(usuarioDto.getEmail());
-        usuario.setCodRecuperarSenha(GeradorNumeroAleatorio.gerarNumeroRandomico());
-
-        /*usuarioDto.setId(usuario.getId());
-        usuarioDto.setSenha("");
-        return usuario;*/
-
-        return usuarioRepository.save(usuario);
+        return usuarioRepository.save(UsuarioBuilder.CriaUsuario(usuarioDto));
     }
 
     @Override

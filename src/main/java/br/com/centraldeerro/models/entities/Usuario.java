@@ -1,4 +1,4 @@
-package br.com.centraldeerro.entities;
+package br.com.centraldeerro.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

@@ -1,4 +1,4 @@
-package br.com.centraldeerro.dto;
+package br.com.centraldeerro.models.entities.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

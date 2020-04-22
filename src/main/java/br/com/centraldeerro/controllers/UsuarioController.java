@@ -1,8 +1,7 @@
 package br.com.centraldeerro.controllers;
 
-import br.com.centraldeerro.dto.UsuarioDto;
-import br.com.centraldeerro.entities.Usuario;
-import br.com.centraldeerro.entities.LogErro;
+import br.com.centraldeerro.models.entities.dto.UsuarioDto;
+import br.com.centraldeerro.models.entities.Usuario;
 import br.com.centraldeerro.services.interfaces.UsuarioService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

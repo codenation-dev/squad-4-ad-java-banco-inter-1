@@ -1,6 +1,6 @@
 package br.com.centraldeerro.repositories;
 
-import br.com.centraldeerro.entities.Usuario;
+import br.com.centraldeerro.models.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

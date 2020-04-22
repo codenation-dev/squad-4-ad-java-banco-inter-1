@@ -1,6 +1,6 @@
 package br.com.centraldeerro.repositories;
 
-import br.com.centraldeerro.entities.LogErro;
+import br.com.centraldeerro.models.entities.LogErro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
