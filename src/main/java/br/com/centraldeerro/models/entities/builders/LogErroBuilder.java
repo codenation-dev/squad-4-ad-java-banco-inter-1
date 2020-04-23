@@ -9,26 +9,25 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class LogErroBuilder {
-    public static LogErro CriarLogErro(LogErroDto logErroDto){
+    public static LogErro CriarLogErroAllParameters(LogErroDto logErroDto){
         LogErro logErro = new LogErro();
         LocalDateTime localDate = LocalDateTime.now();
 
-        logErro.setArquivado(false);
-        logErro.setDataHoraCriacao(Date.from(localDate.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
-        logErro.setNomeUsuario(logErroDto.getNomeUsuario());
-        logErro.setNickName(logErroDto.getNickName());
-
-        logErro.setTipoErro(logErroDto.getTipoErro());
-        logErro.setVersaoSO(logErroDto.getVersaoSO());
-        logErro.setVersaoPlataforma(logErroDto.getVersaoPlataforma());
-        logErro.setSistemaOperacional(logErroDto.getSistemaOperacional());
-        logErro.setPlataformaOrigemErro(logErroDto.getPlataformaOrigemErro());
-        logErro.setErro(logErroDto.getErro());
-        logErro.setDescricao(logErroDto.getDescricao());
-        logErro.setDataHoraErro(logErroDto.getDataHoraErro());
-        logErro.setToken(logErroDto.getToken());
-        logErro.setIp(logErroDto.getIp());
-
-        return logErro;
+        return logErro.builder()
+                .arquivado(false)
+                .dataHoraCriacao(Date.from(localDate.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()))
+                .nomeUsuario(logErroDto.getNomeUsuario())
+                .nickName(logErroDto.getNickName())
+                .tipoErro(logErroDto.getTipoErro())
+                .versaoSO(logErroDto.getVersaoSO())
+                .versaoPlataforma(logErroDto.getVersaoPlataforma())
+                .sistemaOperacional(logErroDto.getSistemaOperacional())
+                .plataformaOrigemErro(logErroDto.getPlataformaOrigemErro())
+                .erro(logErroDto.getErro())
+                .descricao(logErroDto.getDescricao())
+                .dataHoraErro(logErroDto.getDataHoraErro())
+                .token(logErroDto.getToken())
+                .ip(logErroDto.getIp())
+                .build();
     }
 }

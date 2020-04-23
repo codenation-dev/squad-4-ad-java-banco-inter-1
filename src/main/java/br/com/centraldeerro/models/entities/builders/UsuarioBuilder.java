@@ -10,23 +10,19 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class UsuarioBuilder {
-    public static Usuario CriaUsuario(UsuarioDto usuarioDto){
+    public static Usuario CriaUsuarioAllParameters(UsuarioDto usuarioDto){
         Usuario usuario = new Usuario();
         LocalDateTime localDate = LocalDateTime.now();
 
-        usuario.setAtivo(true);
-        usuario.setAdmin(true);
-        usuario.setNome(usuarioDto.getNome());
-        usuario.setPassword(new BCryptPasswordEncoder().encode(usuarioDto.getSenha()));
-        usuario.setUsername(usuarioDto.getUserName());
-        usuario.setDataHoraCriacao(Date.from(localDate.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
-        usuario.setEmail(usuarioDto.getEmail());
-        usuario.setCodRecuperarSenha(GeradorNumeroAleatorio.gerarNumeroRandomico());
-
-        /*usuarioDto.setId(usuario.getId());
-        usuarioDto.setSenha("");
-        return usuario;*/
-
-        return usuario;
+        return usuario.builder()
+                .ativo(true)
+                .admin(true)
+                .nome(usuarioDto.getNome())
+                .password(new BCryptPasswordEncoder().encode(usuarioDto.getSenha()))
+                .username(usuarioDto.getUserName())
+                .dataHoraCriacao(Date.from(localDate.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()))
+                .email(usuarioDto.getEmail())
+                .codRecuperarSenha(GeradorNumeroAleatorio.gerarNumeroRandomico())
+                .build();
     }
 }

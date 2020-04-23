@@ -35,7 +35,7 @@ public class UsuarioServiceImp implements UsuarioService {
 
     @Override
     public Usuario save(UsuarioDto usuarioDto) {
-        return usuarioRepository.save(UsuarioBuilder.CriaUsuario(usuarioDto));
+        return usuarioRepository.save(UsuarioBuilder.CriaUsuarioAllParameters(usuarioDto));
     }
 
     @Override
