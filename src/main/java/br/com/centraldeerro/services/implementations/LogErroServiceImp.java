@@ -30,7 +30,7 @@ public class LogErroServiceImp implements LogErroService {
     @Transactional
     @Override
     public LogErro save(LogErroDto logErroDto) {
-        return logErroRepository.save(LogErroBuilder.CriarLogErro(logErroDto));
+        return logErroRepository.save(LogErroBuilder.CriarLogErroAllParameters(logErroDto));
     }
 
     @Transactional
